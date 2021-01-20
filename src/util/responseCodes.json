@@ -1,0 +1,7 @@
+{
+    "badParameters": 1000,
+    "userNotFound": 1001,
+    "wrongPassword": 1002,
+    "invalidRequestData": 1004,
+    "duplicatedKey": 1062
+}

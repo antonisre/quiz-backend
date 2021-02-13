@@ -9,13 +9,19 @@ const
     bodyParser = require('body-parser');
     const responseHandler = require('./src/util/responseHandler');
     const databaseInit = require('./src/models/index');
+    const insertData = require('./src/util/insertData');
 
 const PORT = process.env.PORT || 3000;
 
 const app = express();
 const server = http.createServer(app);
 const routes = require('./src/routes/index');
-databaseInit();
+
+(async () => {
+    await databaseInit();
+    await insertData();
+})();
+
 
 app.use(cors({ credentials: true, origin: true }));
 app.use(morgan(process.env.LOG || 'combined'));

@@ -1,9 +1,16 @@
 const db = require('../config/database');
+const { Quiz }  =require('./Quiz');
+const { Question }  =require('./Question');
+const { QuestionAnswers }  =require('./QuestionAnswers');
 
 async function databaseInit() {
     try {
         await db.authenticate();
         console.log('DB connection has been established successfully.');
+
+       //relations
+        Quiz.hasMany(Question, { as: 'questions' });
+        Question.hasMany(QuestionAnswers, { as: 'answers' }); 
 
         //sync db
         await db.sync();

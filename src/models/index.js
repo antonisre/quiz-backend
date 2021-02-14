@@ -1,7 +1,9 @@
 const db = require('../config/database');
-const { Quiz }  =require('./Quiz');
-const { Question }  =require('./Question');
-const { QuestionAnswers }  =require('./QuestionAnswers');
+const { User } = require('./User');
+const { Quiz } = require('./Quiz');
+const { Question  } = require('./Question');
+const { QuestionAnswers } = require('./QuestionAnswers');
+const { Leadboard } = require('./Leadboard');
 
 async function databaseInit() {
     try {
@@ -11,6 +13,8 @@ async function databaseInit() {
        //relations
         Quiz.hasMany(Question, { as: 'questions' });
         Question.hasMany(QuestionAnswers, { as: 'answers' }); 
+        User.belongsToMany(Quiz, { through: Leadboard, foreignKey: 'UserId' });
+        Quiz.belongsToMany(User, { through: Leadboard, foreignKey: 'QuizId' }); 
 
         //sync db
         await db.sync();

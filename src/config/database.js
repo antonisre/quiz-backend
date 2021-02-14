@@ -4,5 +4,5 @@ module.exports = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, pro
     host: process.env.DB_HOST,
     dialect: 'mysql',
     alter: true,
-    logging: false
+    //logging: false
 });

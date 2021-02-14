@@ -6,9 +6,7 @@ const schemas = {
         points: Joi.number().required(),
     }) .options({ abortEarly: false }),
     getLeadboards: Joi.object().keys({
-        QuizId: Joi.number().required(),
-        page: Joi.number().min(1).required(),
-        resultsPerPage: Joi.number().required(),
+        QuizId: Joi.number().required()
     }) .options({ abortEarly: false }),
 }; 
 

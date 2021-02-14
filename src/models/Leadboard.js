@@ -42,16 +42,13 @@ const findUsersResults = async (UserId, QuizId) => {
 }
 
 const fetchLeadboardByQuiz = async find => {
-    const { page, resultsPerPage, QuizId } = find;
-    const offset = ((page - 1) * resultsPerPage);
+    const { QuizId } = find;
     const leadboard = await Leadboard.findAll({
         where: { QuizId: QuizId },
         order: [
             ['points', 'DESC'],
             ['time', 'ASC'],
-        ],
-        offset,
-        limit: Number(resultsPerPage)
+        ]
     });
     return leadboard.map(user => user.dataValues);
 }

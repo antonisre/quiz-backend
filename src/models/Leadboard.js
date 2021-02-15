@@ -1,6 +1,7 @@
 const db = require('../config/database');
 const Sequelize = require('sequelize');
 const { isRef } = require('joi');
+const { User } = require('./User');
 const { Quiz } = require('./Quiz');
 
 const Leadboard = db.define('Leadboard', {
@@ -48,6 +49,10 @@ const fetchLeadboardByQuiz = async find => {
         order: [
             ['points', 'DESC'],
             ['time', 'ASC'],
+        ],
+        include: [
+            User,
+            Quiz
         ]
     });
     return leadboard.map(user => user.dataValues);

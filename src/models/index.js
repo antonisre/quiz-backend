@@ -13,8 +13,10 @@ async function databaseInit() {
        //relations
         Quiz.hasMany(Question, { as: 'questions' });
         Question.hasMany(QuestionAnswers, { as: 'answers' }); 
-        User.belongsToMany(Quiz, { through: Leadboard, foreignKey: 'UserId' });
-        Quiz.belongsToMany(User, { through: Leadboard, foreignKey: 'QuizId' }); 
+        User.hasMany(Leadboard);
+        Leadboard.belongsTo(User);
+        Quiz.hasMany(Leadboard);
+        Leadboard.belongsTo(Quiz);
 
         //sync db
         await db.sync();
